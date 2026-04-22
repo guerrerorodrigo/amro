@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "amro"
 include(":app")
- 
+include(":data:source:tmdb-api")
+include(":data:source:tmdb-impl")

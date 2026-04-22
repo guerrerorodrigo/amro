@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
-//    alias(libs.plugins.hilt)
+    alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.compose)
-//    alias(libs.plugins.ksp)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -54,7 +54,12 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
 
+    implementation(libs.hilt)
+    implementation(libs.hilt.navigation.compose)
+    ksp(libs.hilt.compiler)
 
+    implementation(project(":data:source:tmdb-api"))
+    implementation(project(":data:source:tmdb-impl"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
