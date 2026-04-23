@@ -1,5 +1,3 @@
-import java.util.Properties
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.hilt)
@@ -7,26 +5,9 @@ plugins {
 }
 
 android {
-    namespace = "com.rodrigoguerrero.data.source.tmdb.impl"
+    namespace = "com.rodrigoguerrero.domain.home.impl"
     compileSdk {
         version = release(36)
-    }
-
-    val localProperties = Properties().apply {
-        val file = rootProject.file("local.properties")
-        if (file.exists()) {
-            load(file.inputStream())
-        }
-    }
-
-    val myApiKey: String = localProperties.getProperty("TMDB_API_KEY") ?: ""
-
-    defaultConfig {
-        buildConfigField("String", "TMDB_API_KEY", "\"$myApiKey\"")
-    }
-
-    buildFeatures {
-        buildConfig = true
     }
 
     testOptions {
@@ -44,13 +25,13 @@ android {
 }
 
 dependencies {
-    implementation(project(":data:source:tmdb-api"))
-    implementation(libs.bundles.ktor)
+    implementation(project(":domain:common"))
+    implementation(project(":domain:home:home-api"))
+    implementation(project(":data:repository:movies:movies-api"))
 
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
 
-    testImplementation(libs.io.ktor.ktor.client.mock)
     testImplementation(libs.bundles.junit)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockk)

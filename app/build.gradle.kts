@@ -60,10 +60,13 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
 
-    implementation(project(":data:source:tmdb-api"))
-    implementation(project(":data:source:tmdb-impl"))
     implementation(project(":data:repository:movies:movies-api"))
     implementation(project(":data:repository:movies:movies-impl"))
+    implementation(project(":data:source:tmdb-api"))
+    implementation(project(":data:source:tmdb-impl"))
+    implementation(project(":domain:common"))
+    implementation(project(":domain:home:home-api"))
+    implementation(project(":domain:home:home-impl"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

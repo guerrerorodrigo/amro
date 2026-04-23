@@ -29,7 +29,6 @@ dependencies {
     implementation(project(":data:source:tmdb-api"))
 
     implementation(libs.hilt)
-    implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
 
     testImplementation(libs.bundles.junit)

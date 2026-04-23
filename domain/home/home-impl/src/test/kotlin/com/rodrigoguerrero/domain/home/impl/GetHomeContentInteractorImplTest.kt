@@ -1,0 +1,119 @@
+package com.rodrigoguerrero.domain.home.impl
+
+import com.rodrigoguerrero.domain.home.api.models.TrendingMovie
+import com.rodrigoguerrero.domain.home.impl.mappers.TrendingMovieMapper
+import com.rodrigoguerrero.repository.movies.api.MovieGenresRepository
+import com.rodrigoguerrero.repository.movies.api.MoviesRepository
+import com.rodrigoguerrero.repository.movies.api.models.Trending
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
+import com.rodrigoguerrero.repository.movies.api.models.Genre as RepoGenre
+
+@OptIn(ExperimentalCoroutinesApi::class)
+internal class GetHomeContentInteractorImplTest {
+    private val unconfinedTestDispatcher = UnconfinedTestDispatcher()
+    private val moviesRepository = mockk<MoviesRepository>()
+    private val genresRepository = mockk<MovieGenresRepository>()
+    private val trendingMovieMapper = mockk<TrendingMovieMapper>()
+
+    private val subject = GetHomeContentInteractorImpl(
+        moviesRepository = moviesRepository,
+        genresRepository = genresRepository,
+        trendingMovieMapper = trendingMovieMapper,
+    )
+
+    @Test
+    @DisplayName(
+        """
+            Given repositories return success and mapper returns mapped list of trending movies
+            When calling getTrendingMovies()
+            Then result is success, repositories are called, and mapper is called with correct data
+        """
+    )
+    fun getTrendingMoviesSuccessTest() {
+        val genresRepo = listOf<RepoGenre>(mockk())
+        val trendingRepo = listOf<Trending>(mockk())
+        val trendingDomain = listOf<TrendingMovie>(mockk())
+
+        coEvery { genresRepository.getMovieGenres() } returns Result.success(genresRepo)
+        coEvery { moviesRepository.getTrendingMovies() } returns Result.success(trendingRepo)
+        every { trendingMovieMapper.toTrendingMovies(any(), any()) } returns trendingDomain
+
+        runTest(unconfinedTestDispatcher) {
+            val result = subject.getTrendingMovies()
+
+            assertAll(
+                { assertTrue(result.isSuccess) },
+                { coVerify(exactly = 1) { genresRepository.getMovieGenres() } },
+                { coVerify(exactly = 1) { moviesRepository.getTrendingMovies() } },
+                {
+                    verify(exactly = 1) {
+                        trendingMovieMapper.toTrendingMovies(
+                            trendingMovies = trendingRepo,
+                            genres = genresRepo,
+                        )
+                    }
+                },
+            )
+        }
+    }
+
+    @Test
+    @DisplayName(
+        """
+            Given trending movies repo returns failure
+            When calling getTrendingMovies()
+            Then result is failure, genres and movies repos are called, and mapper is not called
+        """
+    )
+    fun getTrendingMoviesRepoFailureTest() {
+        coEvery { genresRepository.getMovieGenres() } returns Result.success(mockk())
+        coEvery { moviesRepository.getTrendingMovies() } returns Result.failure(Exception())
+
+        runTest(unconfinedTestDispatcher) {
+            val result = subject.getTrendingMovies()
+
+            assertAll(
+                { assertTrue(result.isFailure) },
+                { coVerify(exactly = 1) { genresRepository.getMovieGenres() } },
+                { coVerify(exactly = 1) { moviesRepository.getTrendingMovies() } },
+                { verify(exactly = 0) { trendingMovieMapper.toTrendingMovies(any(), any()) } },
+            )
+        }
+    }
+
+    @Test
+    @DisplayName(
+        """
+            Given trending movies mapper throws exception
+            When calling getTrendingMovies()
+            Then result is failure
+        """
+    )
+    fun getTrendingMoviesMapperFailureTest() {
+        coEvery { genresRepository.getMovieGenres() } returns Result.success(mockk())
+        coEvery { moviesRepository.getTrendingMovies() } returns Result.success(listOf(mockk()))
+        every { trendingMovieMapper.toTrendingMovies(any(), any()) } throws Exception()
+
+        runTest(unconfinedTestDispatcher) {
+            val result = subject.getTrendingMovies()
+
+            assertAll(
+                { assertTrue(result.isFailure) },
+                { coVerify(exactly = 1) { genresRepository.getMovieGenres() } },
+                { coVerify(exactly = 1) { moviesRepository.getTrendingMovies() } },
+                { verify(exactly = 1) { trendingMovieMapper.toTrendingMovies(any(), any()) } },
+            )
+        }
+    }
+}
