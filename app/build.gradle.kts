@@ -13,7 +13,9 @@ kotlin {
 
 android {
     namespace = "com.rodrigoguerrero.amro"
-    compileSdk = 36
+    compileSdk {
+        version = release(36)
+    }
 
     defaultConfig {
         applicationId = "com.rodrigoguerrero.amro"
@@ -60,6 +62,8 @@ dependencies {
 
     implementation(project(":data:source:tmdb-api"))
     implementation(project(":data:source:tmdb-impl"))
+    implementation(project(":data:repository:movies:movies-api"))
+    implementation(project(":data:repository:movies:movies-impl"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "com.rodrigoguerrero.data.source.tmdb.api"
+    namespace = "com.rodrigoguerrero.repository.movies.api"
     compileSdk {
         version = release(36)
     }
 }
 
 dependencies {
-    implementation(libs.kotlinx.serialization.json)
+
 }
