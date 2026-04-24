@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.rodrigoguerrero.amro.ui.theme.AmroTheme
+import com.rodrigoguerrero.theme.AppTheme
 import com.rodrigoguerrero.ui.home.HomeScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AmroTheme {
+            AppTheme {
                 HomeScreen()
             }
         }
