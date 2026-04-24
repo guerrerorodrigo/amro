@@ -67,6 +67,7 @@ dependencies {
     implementation(project(":domain:common"))
     implementation(project(":domain:home:home-api"))
     implementation(project(":domain:home:home-impl"))
+    implementation(project(":ui:common:mvi"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -24,6 +24,9 @@
             <option value="$PROJECT_DIR$/domain/home" />
             <option value="$PROJECT_DIR$/domain/home/home-api" />
             <option value="$PROJECT_DIR$/domain/home/home-impl" />
+            <option value="$PROJECT_DIR$/ui" />
+            <option value="$PROJECT_DIR$/ui/common" />
+            <option value="$PROJECT_DIR$/ui/common/mvi" />
           </set>
         </option>
       </GradleProjectSettings>
