@@ -1,8 +1,8 @@
 [versions]
 activityCompose = "1.13.0"
-agp = "9.0.1"
-composeBom = "2026.03.01"
-compose-navigation = "2.9.7"
+agp = "9.2.0"
+composeBom = "2026.04.01"
+compose-navigation = "2.9.8"
 core = "1.7.0"
 coreKtx = "1.18.0"
 coroutines = "1.8.1"
@@ -23,7 +23,7 @@ lifecycle-ktx = "2.10.0"
 runner = "1.7.0"
 material = "1.13.0"
 mockk = "1.14.9"
-turbine = "0.12.1"
+turbine = "1.2.1"
 
 [libraries]
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
@@ -42,7 +42,7 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "j
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-ktx" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle-ktx" }
 androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
-androidx-text-core = { group = "androidx.test", name = "core", version.ref = "core" }
+androidx-test-core = { group = "androidx.test", name = "core", version.ref = "core" }
 coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines"}
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
@@ -89,4 +89,15 @@ junit = [
     "junit-api",
     "junit-engine",
     "junit-platform-launcher"
+]
+
+compose = [
+    "androidx-activity-compose",
+    "androidx-compose-ui",
+    "androidx-compose-ui-graphics",
+    "androidx-compose-ui-tooling-preview",
+    "androidx-compose-material3",
+    "androidx-compose-navigation",
+    "androidx-lifecycle-viewmodel-ktx",
+    "androidx-lifecycle-runtime-ktx"
 ]

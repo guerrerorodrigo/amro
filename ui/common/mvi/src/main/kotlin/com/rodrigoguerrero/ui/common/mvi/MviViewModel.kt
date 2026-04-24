@@ -1,7 +1,7 @@
 package com.rodrigoguerrero.ui.common.mvi
 
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.CoroutineScope
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.StateFlow
 
 /**
@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.StateFlow
  * @param S The [State] managed by this [ViewModel].
  * @param A The [MviAction]s this [ViewModel] handles.
  *
- * @param coroutineScope the [CoroutineScope] to use for this [ViewModel].
  * @param initialState the initial [State] of this [ViewModel].
  * @param reducer the [Reducer] to use for this [ViewModel].
  * @param router the [Router] to use for this [ViewModel].
@@ -18,16 +17,15 @@ import kotlinx.coroutines.flow.StateFlow
  * @constructor Creates a new [MviViewModel] instance.
  */
 open class MviViewModel<S : State, A : MviAction>(
-    coroutineScope: CoroutineScope,
     initialState: S,
     reducer: Reducer<S, A>,
     router: Router<A>? = null,
     private val middlewares: List<Middleware<S, A>> = emptyList(),
-) : ViewModel(viewModelScope = coroutineScope) {
+) : ViewModel() {
 
     private val stateReducer: MviOrchestrator<S, A> = MviOrchestrator(
         initialState = initialState,
-        scope = coroutineScope,
+        scope = viewModelScope,
         reducer = reducer,
         middlewares = middlewares,
         router = router,
@@ -39,7 +37,7 @@ open class MviViewModel<S : State, A : MviAction>(
     init {
         middlewares.forEach { middleware ->
             middleware.setup(
-                scope = coroutineScope,
+                scope = viewModelScope,
                 dispatcher = stateReducer,
             )
         }

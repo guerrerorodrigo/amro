@@ -5,17 +5,13 @@ import com.rodrigoguerrero.ui.common.mvi.testdata.anotherMiddleware
 import com.rodrigoguerrero.ui.common.mvi.testdata.fakeReducer
 import com.rodrigoguerrero.ui.common.mvi.testdata.middleware
 import io.mockk.verify
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class MviViewModelTest {
-    private val coroutineScope = CoroutineScope(UnconfinedTestDispatcher())
-
     @Test
     @DisplayName(
         """
@@ -26,14 +22,13 @@ internal class MviViewModelTest {
     )
     fun initializeTest() {
         MviViewModel(
-            coroutineScope = coroutineScope,
             initialState = TestState.InitialState,
             reducer = fakeReducer,
             middlewares = listOf(middleware, anotherMiddleware),
         )
         assertAll(
-            { verify(exactly = 1) { middleware.setup(coroutineScope, any()) } },
-            { verify(exactly = 1) { anotherMiddleware.setup(coroutineScope, any()) } },
+            { verify(exactly = 1) { middleware.setup(any(), any()) } },
+            { verify(exactly = 1) { anotherMiddleware.setup(any(), any()) } },
         )
     }
 }

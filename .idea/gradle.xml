@@ -27,6 +27,8 @@
             <option value="$PROJECT_DIR$/ui" />
             <option value="$PROJECT_DIR$/ui/common" />
             <option value="$PROJECT_DIR$/ui/common/mvi" />
+            <option value="$PROJECT_DIR$/ui/feature" />
+            <option value="$PROJECT_DIR$/ui/feature/home" />
           </set>
         </option>
       </GradleProjectSettings>
