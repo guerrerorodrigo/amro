@@ -1,17 +1,20 @@
 package com.rodrigoguerrero.ui.home.middlewares
 
 import com.rodrigoguerrero.domain.home.api.GetHomeContentInteractor
-import com.rodrigoguerrero.domain.home.api.models.TrendingMovie as DomainTrendingMovie
+import com.rodrigoguerrero.domain.home.api.models.HomeContent
 import com.rodrigoguerrero.ui.common.mvi.Middleware
+import com.rodrigoguerrero.ui.home.mappers.GenreMapper
 import com.rodrigoguerrero.ui.home.mappers.TrendingMovieMapper
 import com.rodrigoguerrero.ui.home.mvi.HomeAction
+import com.rodrigoguerrero.ui.home.mvi.HomeAction.OnDataLoaded
 import com.rodrigoguerrero.ui.home.mvi.HomeState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 internal class HomeMiddleware @Inject constructor(
     private val interactor: GetHomeContentInteractor,
-    private val mapper: TrendingMovieMapper,
+    private val trendingMovieMapper: TrendingMovieMapper,
+    private val genreMapper: GenreMapper,
 ) : Middleware<HomeState, HomeAction>() {
     override fun process(
         state: HomeState,
@@ -36,8 +39,14 @@ internal class HomeMiddleware @Inject constructor(
         }
     }
 
-    private fun processSuccess(trendingMovies: List<DomainTrendingMovie>) {
-        val trending = mapper.toTrendingMovies(trendingMovies = trendingMovies)
-        dispatch(HomeAction.OnDataLoaded(trendingMovies = trending))
+    private fun processSuccess(homeContent: HomeContent) {
+        dispatch(
+            OnDataLoaded(
+                trendingMovies = trendingMovieMapper.toTrendingMovies(
+                    trendingMovies = homeContent.trendingMovies,
+                ),
+                genres = genreMapper.toGenres(genres = homeContent.genres),
+            )
+        )
     }
 }

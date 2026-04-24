@@ -5,7 +5,6 @@ import com.rodrigoguerrero.domain.common.ImageUrlBuilder
 import com.rodrigoguerrero.domain.home.api.models.Genre
 import com.rodrigoguerrero.domain.home.api.models.TrendingMovie
 import javax.inject.Inject
-import com.rodrigoguerrero.repository.movies.api.models.Genre as RepoGenre
 import com.rodrigoguerrero.repository.movies.api.models.Trending as RepoTrendingMovie
 
 internal class TrendingMovieMapper @Inject constructor(
@@ -14,9 +13,8 @@ internal class TrendingMovieMapper @Inject constructor(
 ) {
     fun toTrendingMovies(
         trendingMovies: List<RepoTrendingMovie>,
-        genres: List<RepoGenre>,
+        genres: List<Genre>,
     ): List<TrendingMovie> {
-        val genres = genresMapper.toGenres(genres = genres)
         return trendingMovies.map { trendingMovie ->
             toTrendingMovie(
                 trendingMovie = trendingMovie,

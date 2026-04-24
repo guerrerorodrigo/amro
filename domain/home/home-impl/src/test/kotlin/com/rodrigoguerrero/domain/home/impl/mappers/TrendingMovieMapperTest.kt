@@ -2,9 +2,7 @@ package com.rodrigoguerrero.domain.home.impl.mappers
 
 import com.rodrigoguerrero.domain.common.ImageSize
 import com.rodrigoguerrero.domain.common.ImageUrlBuilder
-import com.rodrigoguerrero.domain.home.impl.testdata.anotherGenre
 import com.rodrigoguerrero.domain.home.impl.testdata.expectedTrending
-import com.rodrigoguerrero.domain.home.impl.testdata.genre
 import com.rodrigoguerrero.domain.home.impl.testdata.genres
 import com.rodrigoguerrero.domain.home.impl.testdata.trending
 import io.mockk.every
@@ -29,15 +27,14 @@ internal class TrendingMovieMapperTest {
 
     @Test
     fun toTrendingMoviesTest() {
-        val genresList = listOf(genre, anotherGenre)
         val result = subject.toTrendingMovies(
             trendingMovies = listOf(trending),
-            genres = genresList,
+            genres = genres,
         )
 
         assertAll(
             { assertEquals(expectedTrending, result.first()) },
-            { verify(exactly = 1) { genresMapper.toGenres(genresList) } },
+            { verify(exactly = 1) { genresMapper.filterGenresByIds(trending.genreIds, genres) } },
             {
                 verify(exactly = 1) {
                     genresMapper.filterGenresByIds(genreIds = listOf(1, 2), genres = genres)

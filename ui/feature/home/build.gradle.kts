@@ -28,6 +28,7 @@ android {
 dependencies {
     implementation(project(":domain:home:home-api"))
     implementation(project(":ui:common:mvi"))
+    implementation(project(":ui:common:theme"))
 
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
@@ -36,6 +37,8 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
     implementation(libs.kotlinx.collections.immutable)
+
+    implementation(libs.coil.compose)
 
     testImplementation(libs.bundles.junit)
     testImplementation(libs.kotlinx.coroutines.test)
