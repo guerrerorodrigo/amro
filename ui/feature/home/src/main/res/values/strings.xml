@@ -6,4 +6,5 @@
     <string name="release_date">Release date</string>
     <string name="sort_by_dropdown_menu">Sort by dropdown menu</string>
     <string name="sort_by">"Sort by: "</string>
+    <string name="there_are_no_results">There are no results</string>
 </resources>

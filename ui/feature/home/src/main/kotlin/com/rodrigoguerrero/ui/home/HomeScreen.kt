@@ -12,6 +12,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.rodrigoguerrero.theme.components.FullScreenLoader
 import com.rodrigoguerrero.theme.components.errors.FullScreenMessage
+import com.rodrigoguerrero.theme.components.errors.FullScreenMessageState
 import com.rodrigoguerrero.ui.home.components.TrendingMoviesGrid
 import com.rodrigoguerrero.ui.home.components.TrendingTopBar
 import com.rodrigoguerrero.ui.home.mvi.HomeViewModel
@@ -55,7 +56,12 @@ internal fun HomeScreenInternal(
                 )
             }
 
-            // TODO: show empty message
+            state.filteredTrendingMovies.isEmpty() -> FullScreenMessage(
+                state = FullScreenMessageState.LocalFullScreenMessage(
+                    messageRes = R.string.there_are_no_results,
+                    ctaLabelRes = null,
+                )
+            )
             else -> TrendingMoviesGrid(
                 sortingOrder = state.sortingOrder,
                 sortingType = state.sortingType,

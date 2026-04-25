@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -32,9 +33,9 @@ import com.rodrigoguerrero.theme.components.preview.WidgetPreviews
  */
 @Composable
 fun FullScreenMessage(
-    onClick: () -> Unit,
     state: FullScreenMessageState,
     modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null,
 ) {
     val focusRequester = remember { FocusRequester() }
 
@@ -61,11 +62,17 @@ fun FullScreenMessage(
                     .focusRequester(focusRequester)
                     .focusable(enabled = true),
             )
-            Button(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = onClick,
-            ) {
-                Text(text = stringResource(state.ctaLabelRes))
+
+            if (onClick != null && state.ctaLabelRes != null) {
+                state.ctaLabelRes?.let { labelRes ->
+                    Button(
+                        modifier = Modifier.fillMaxWidth(),
+                        onClick = onClick,
+                        shape = RoundedCornerShape(size = AmroTheme.dimens.radius.xs),
+                    ) {
+                        Text(text = stringResource(labelRes))
+                    }
+                }
             }
         }
     }
