@@ -7,4 +7,7 @@ package com.rodrigoguerrero.domain.common
 enum class ImageSize(val size: String) {
     /** 300px image */
     W300("w300"),
+
+    /** original size */
+    Original("original"),
 }

@@ -21,6 +21,9 @@
             <option value="$PROJECT_DIR$/data/source/tmdb-impl" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/domain/common" />
+            <option value="$PROJECT_DIR$/domain/details" />
+            <option value="$PROJECT_DIR$/domain/details/details-api" />
+            <option value="$PROJECT_DIR$/domain/details/details-impl" />
             <option value="$PROJECT_DIR$/domain/home" />
             <option value="$PROJECT_DIR$/domain/home/home-api" />
             <option value="$PROJECT_DIR$/domain/home/home-impl" />

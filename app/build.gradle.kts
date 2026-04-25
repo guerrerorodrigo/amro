@@ -67,6 +67,8 @@ dependencies {
     implementation(project(":domain:common"))
     implementation(project(":domain:home:home-api"))
     implementation(project(":domain:home:home-impl"))
+    implementation(project(":domain:details:details-api"))
+    implementation(project(":domain:details:details-impl"))
     implementation(project(":ui:common:mvi"))
     implementation(project(":ui:common:theme"))
     implementation(project(":ui:feature:home"))

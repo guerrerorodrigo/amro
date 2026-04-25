@@ -5,14 +5,9 @@ plugins {
 }
 
 android {
-    namespace = "com.rodrigoguerrero.domain.common"
-
+    namespace = "com.rodrigoguerrero.domain.details.impl"
     compileSdk {
         version = release(36)
-    }
-
-    defaultConfig {
-        minSdk = 24
     }
 
     testOptions {
@@ -30,10 +25,12 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain:common"))
+    implementation(project(":domain:details:details-api"))
+    implementation(project(":data:repository:movies:movies-api"))
+
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
-
-    implementation(libs.kotlinx.datetime)
 
     testImplementation(libs.bundles.junit)
     testImplementation(libs.kotlinx.coroutines.test)
