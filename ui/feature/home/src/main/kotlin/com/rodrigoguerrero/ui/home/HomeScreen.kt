@@ -8,14 +8,18 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.rodrigoguerrero.theme.components.FullScreenLoader
 import com.rodrigoguerrero.theme.components.errors.FullScreenMessage
 import com.rodrigoguerrero.theme.components.errors.FullScreenMessageState
+import com.rodrigoguerrero.theme.components.preview.PreviewBox
+import com.rodrigoguerrero.theme.components.preview.WidgetPreviews
 import com.rodrigoguerrero.ui.home.components.TrendingMoviesGrid
 import com.rodrigoguerrero.ui.home.components.TrendingTopBar
 import com.rodrigoguerrero.ui.home.mvi.HomeAction
+import com.rodrigoguerrero.ui.home.mvi.HomeState
 import com.rodrigoguerrero.ui.home.mvi.HomeViewModel
 
 /**
@@ -35,6 +39,19 @@ internal fun HomeScreenInternal(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
+    HomeScreenContent(
+        state = state,
+        onAction = viewModel::handleAction,
+        modifier = modifier,
+    )
+}
+
+@Composable
+internal fun HomeScreenContent(
+    state: HomeState,
+    onAction: (HomeAction) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
         contentWindowInsets = WindowInsets.safeDrawing,
@@ -42,7 +59,7 @@ internal fun HomeScreenInternal(
             TrendingTopBar(
                 genres = state.genres,
                 selectedGenres = state.selectedGenres,
-                onAction = viewModel::handleAction,
+                onAction = onAction,
                 sortingOrder = state.sortingOrder,
                 sortingType = state.sortingType,
             )
@@ -50,12 +67,10 @@ internal fun HomeScreenInternal(
     ) { paddingValues ->
         when {
             state.isLoading -> FullScreenLoader()
-            state.fullScreenMessageState != null -> state.fullScreenMessageState?.let { errorState ->
-                FullScreenMessage(
-                    onClick = { viewModel.handleAction(HomeAction.OnLoad) },
-                    state = errorState,
-                )
-            }
+            state.fullScreenMessageState != null -> FullScreenMessage(
+                onClick = { onAction(HomeAction.OnLoad) },
+                state = state.fullScreenMessageState,
+            )
 
             state.filteredTrendingMovies.isEmpty() -> FullScreenMessage(
                 state = FullScreenMessageState.LocalFullScreenMessage(
@@ -63,6 +78,7 @@ internal fun HomeScreenInternal(
                     ctaLabelRes = null,
                 )
             )
+
             else -> TrendingMoviesGrid(
                 sortingOrder = state.sortingOrder,
                 sortingType = state.sortingType,
@@ -70,5 +86,15 @@ internal fun HomeScreenInternal(
                 modifier = Modifier.padding(paddingValues),
             )
         }
+    }
+}
+
+@WidgetPreviews
+@Composable
+private fun PreviewHomeScreen(
+    @PreviewParameter(HomeParamProvider::class) data: HomeState,
+) {
+    PreviewBox {
+        HomeScreenContent(state = data, onAction = {})
     }
 }
