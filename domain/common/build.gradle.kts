@@ -29,6 +29,8 @@ dependencies {
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
 
+    implementation(libs.kotlinx.datetime)
+
     testImplementation(libs.bundles.junit)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockk)

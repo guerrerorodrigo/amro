@@ -47,17 +47,17 @@ internal class MoviesRepositoryImplTest {
     fun getTrendingMoviesSuccessTest() {
         every { trendingMapper.toTrending(any()) } returns listOf(expectedTrending)
         coEvery {
-            dataSource.getTrending(any(), any())
+            dataSource.getTrending(any(), any(), any())
         } returns Result.success(trendingPageResultDto)
 
         runTest(unconfinedTestDispatcher) {
-            val result = subject.getTrendingMovies()
+            val result = subject.getTrendingMovies(page = 1)
 
             assertAll(
                 { assertTrue(result.isSuccess) },
                 { assertEquals(listOf(expectedTrending), result.getOrNull()) },
                 { verify(exactly = 1) { trendingMapper.toTrending(trendingPageResultDto) } },
-                { coVerify(exactly = 1) { dataSource.getTrending(TimeWindow.Week, MediaType.Movie) } },
+                { coVerify(exactly = 1) { dataSource.getTrending(1, TimeWindow.Week, MediaType.Movie) } },
             )
         }
     }
@@ -73,11 +73,11 @@ internal class MoviesRepositoryImplTest {
     fun getTrendingDataSourceFailsTest() {
         val exception = Exception()
         coEvery {
-            dataSource.getTrending(any(), any())
+            dataSource.getTrending(any(), any(), any())
         } returns Result.failure(exception)
 
         runTest(unconfinedTestDispatcher) {
-            val result = subject.getTrendingMovies()
+            val result = subject.getTrendingMovies(page = 1)
 
             assertAll(
                 { assertTrue(result.isFailure) },
@@ -97,18 +97,18 @@ internal class MoviesRepositoryImplTest {
     fun getTrendingMapperFailsTest() {
         val exception = Exception()
         coEvery {
-            dataSource.getTrending(any(), any())
+            dataSource.getTrending(any(), any(), any())
         } returns Result.success(trendingPageResultDto)
         every { trendingMapper.toTrending(any()) } throws exception
 
         runTest(unconfinedTestDispatcher) {
-            val result = subject.getTrendingMovies()
+            val result = subject.getTrendingMovies(page = 1)
 
             assertAll(
                 { assertTrue(result.isFailure) },
                 { assertEquals(exception, result.exceptionOrNull()) },
                 { verify(exactly = 1) { trendingMapper.toTrending(trendingPageResultDto) } },
-                { coVerify(exactly = 1) { dataSource.getTrending(TimeWindow.Week, MediaType.Movie) } },
+                { coVerify(exactly = 1) { dataSource.getTrending(1, TimeWindow.Week, MediaType.Movie) } },
             )
         }
     }

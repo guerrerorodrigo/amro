@@ -11,6 +11,10 @@ android {
         version = release(36)
     }
 
+    defaultConfig {
+        minSdk = 24
+    }
+
     testOptions {
         unitTests.all {
             it.useJUnitPlatform {

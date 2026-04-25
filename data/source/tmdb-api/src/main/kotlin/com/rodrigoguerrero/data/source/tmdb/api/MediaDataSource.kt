@@ -14,11 +14,13 @@ interface MediaDataSource {
 
     /**
      * Gets the trending results for the provided [timeWindow] and [mediaType]
+     * @param page the page number to request
      * @param timeWindow [TimeWindow] for the trending media
      * @param mediaType [MediaType] for the trending media
      * @return a [Result] with a [PageResultDto] containing a list of trending media
      */
     suspend fun getTrending(
+        page: Int,
         timeWindow: TimeWindow,
         mediaType: MediaType
     ): Result<PageResultDto<TrendingDto>>

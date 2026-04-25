@@ -11,17 +11,21 @@ import com.rodrigoguerrero.data.source.tmdb.impl.di.TmdbClient
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.request.parameter
 import javax.inject.Inject
 
 internal class TmdbMediaDataSourceImpl @Inject constructor(
     @TmdbClient private val httpClient: HttpClient,
 ) : MediaDataSource {
     override suspend fun getTrending(
+        page: Int,
         timeWindow: TimeWindow,
         mediaType: MediaType,
     ): Result<PageResultDto<TrendingDto>> = runCatching {
         httpClient
-            .get("trending/${mediaType.value}/${timeWindow.value}")
+            .get("trending/${mediaType.value}/${timeWindow.value}") {
+                parameter(key = "page", page)
+            }
             .body()
     }
 

@@ -4,6 +4,8 @@ import androidx.compose.runtime.Stable
 import com.rodrigoguerrero.theme.components.errors.FullScreenMessageState
 import com.rodrigoguerrero.ui.common.mvi.State
 import com.rodrigoguerrero.ui.home.models.Genre
+import com.rodrigoguerrero.ui.home.models.SortingOrder
+import com.rodrigoguerrero.ui.home.models.SortingType
 import com.rodrigoguerrero.ui.home.models.TrendingMovie
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableSet
@@ -18,6 +20,8 @@ internal data class HomeState(
     val genres: ImmutableList<Genre>,
     val fullScreenMessageState: FullScreenMessageState?,
     val selectedGenres: ImmutableSet<Int>,
+    val sortingType: SortingType,
+    val sortingOrder: SortingOrder,
 ) : State {
     companion object {
         val initial = HomeState(
@@ -27,6 +31,8 @@ internal data class HomeState(
             filteredTrendingMovies = persistentListOf(),
             isLoading = true,
             fullScreenMessageState = null,
+            sortingType = SortingType.Popularity,
+            sortingOrder = SortingOrder.Descending,
         )
     }
 }

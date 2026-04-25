@@ -4,9 +4,9 @@ import com.rodrigoguerrero.domain.home.api.models.TrendingMovie
 import com.rodrigoguerrero.domain.home.impl.mappers.GenresMapper
 import com.rodrigoguerrero.domain.home.impl.mappers.TrendingMovieMapper
 import com.rodrigoguerrero.domain.home.impl.testdata.genres
+import com.rodrigoguerrero.domain.home.impl.testdata.trending
 import com.rodrigoguerrero.repository.movies.api.MovieGenresRepository
 import com.rodrigoguerrero.repository.movies.api.MoviesRepository
-import com.rodrigoguerrero.repository.movies.api.models.Trending
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
+import org.junit.jupiter.api.assertInstanceOf
 import com.rodrigoguerrero.repository.movies.api.models.Genre as RepoGenre
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -47,11 +48,10 @@ internal class GetHomeContentInteractorImplTest {
     )
     fun getTrendingMoviesSuccessTest() {
         val genresRepo = listOf<RepoGenre>(mockk())
-        val trendingRepo = listOf<Trending>(mockk())
         val trendingDomain = listOf<TrendingMovie>(mockk())
 
         coEvery { genresRepository.getMovieGenres() } returns Result.success(genresRepo)
-        coEvery { moviesRepository.getTrendingMovies() } returns Result.success(trendingRepo)
+        coEvery { moviesRepository.getTrendingMovies(any()) } returns Result.success(listOf(trending))
         every { trendingMovieMapper.toTrendingMovies(any(), any()) } returns trendingDomain
         every { genresMapper.toGenres(any()) } returns genres
 
@@ -63,12 +63,12 @@ internal class GetHomeContentInteractorImplTest {
                 { assertEquals(trendingDomain, result.getOrNull()?.trendingMovies) },
                 { assertEquals(genres, result.getOrNull()?.genres) },
                 { coVerify(exactly = 1) { genresRepository.getMovieGenres() } },
-                { coVerify(exactly = 1) { moviesRepository.getTrendingMovies() } },
+                { coVerify(exactly = 5) { moviesRepository.getTrendingMovies(any()) } },
                 { coVerify(exactly = 1) { genresMapper.toGenres(genresRepo) } },
                 {
                     verify(exactly = 1) {
                         trendingMovieMapper.toTrendingMovies(
-                            trendingMovies = trendingRepo,
+                            trendingMovies = listOf(trending),
                             genres = genres,
                         )
                     }
@@ -87,15 +87,16 @@ internal class GetHomeContentInteractorImplTest {
     )
     fun getTrendingMoviesRepoFailureTest() {
         coEvery { genresRepository.getMovieGenres() } returns Result.success(mockk())
-        coEvery { moviesRepository.getTrendingMovies() } returns Result.failure(Exception())
+        coEvery { moviesRepository.getTrendingMovies(any()) } returns Result.failure(Exception())
 
         runTest(unconfinedTestDispatcher) {
             val result = subject.getTrendingMovies()
 
             assertAll(
                 { assertTrue(result.isFailure) },
-                { coVerify(exactly = 1) { genresRepository.getMovieGenres() } },
-                { coVerify(exactly = 1) { moviesRepository.getTrendingMovies() } },
+                { assertInstanceOf<IllegalStateException>(result.exceptionOrNull()) },
+                { coVerify(exactly = 5) { moviesRepository.getTrendingMovies(any()) } },
+                { coVerify(exactly = 0) { genresRepository.getMovieGenres() } },
                 { verify(exactly = 0) { trendingMovieMapper.toTrendingMovies(any(), any()) } },
             )
         }
@@ -110,18 +111,18 @@ internal class GetHomeContentInteractorImplTest {
         """
     )
     fun getTrendingMoviesMapperFailureTest() {
-        coEvery { genresRepository.getMovieGenres() } returns Result.success(mockk())
-        coEvery { moviesRepository.getTrendingMovies() } returns Result.success(listOf(mockk()))
+        coEvery { genresRepository.getMovieGenres() } returns Result.success(listOf(mockk()))
+        coEvery { moviesRepository.getTrendingMovies(any()) } returns Result.success(listOf(trending))
         every { genresMapper.toGenres(any()) } returns genres
         every { trendingMovieMapper.toTrendingMovies(any(), any()) } throws Exception()
 
         runTest(unconfinedTestDispatcher) {
-            val result = subject.getTrendingMovies()
+            val result = subject.getTrendingMovies(totalPages = 1)
 
             assertAll(
                 { assertTrue(result.isFailure) },
                 { coVerify(exactly = 1) { genresRepository.getMovieGenres() } },
-                { coVerify(exactly = 1) { moviesRepository.getTrendingMovies() } },
+                { coVerify(exactly = 1) { moviesRepository.getTrendingMovies(any()) } },
                 { verify(exactly = 1) { trendingMovieMapper.toTrendingMovies(any(), any()) } },
             )
         }

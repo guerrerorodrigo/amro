@@ -5,9 +5,12 @@ import com.rodrigoguerrero.data.source.tmdb.api.models.TrendingDto
 import com.rodrigoguerrero.repository.movies.api.models.Trending
 
 internal val trendingDto = TrendingDto(
+    id = 1234,
     title = "title",
     imageUrl = "image url",
     genreIds = listOf(123),
+    popularity = 8.43,
+    releaseDate = "release date",
 )
 
 internal val trendingPageResultDto = PageResultDto(
@@ -19,7 +22,10 @@ internal val emptyTrendingPageResultDto = PageResultDto<TrendingDto>(
 )
 
 internal val expectedTrending = Trending(
+    id = 1234,
     title = "title",
     imageUrl = "image url",
     genreIds = listOf(123),
+    popularity = 8.43,
+    releaseDate = "release date",
 )

@@ -2,8 +2,6 @@ package com.rodrigoguerrero.ui.home.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.FilterChip
@@ -29,9 +27,7 @@ internal fun TrendingFilter(
     modifier: Modifier = Modifier,
 ) {
     LazyRow(
-        modifier = modifier
-            .fillMaxWidth()
-            .statusBarsPadding(),
+        modifier = modifier,
         contentPadding = PaddingValues(horizontal = AmroTheme.dimens.padding.md),
         horizontalArrangement = Arrangement.spacedBy(AmroTheme.dimens.padding.md),
     ) {

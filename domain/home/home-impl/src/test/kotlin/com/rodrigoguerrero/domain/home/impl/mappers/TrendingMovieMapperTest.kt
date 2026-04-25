@@ -1,5 +1,6 @@
 package com.rodrigoguerrero.domain.home.impl.mappers
 
+import com.rodrigoguerrero.domain.common.DateConverter
 import com.rodrigoguerrero.domain.common.ImageSize
 import com.rodrigoguerrero.domain.common.ImageUrlBuilder
 import com.rodrigoguerrero.domain.home.impl.testdata.expectedTrending
@@ -20,9 +21,13 @@ internal class TrendingMovieMapperTest {
     private val imageUrlBuilder = mockk<ImageUrlBuilder> {
         every { buildUrl(any(), any()) } returns "image url"
     }
+    private val dateConverter = mockk<DateConverter> {
+        every { toEpochMilliseconds(any()) } returns 1234500000L
+    }
     private val subject = TrendingMovieMapper(
         genresMapper = genresMapper,
         imageUrlBuilder = imageUrlBuilder,
+        dateConverter = dateConverter,
     )
 
     @Test

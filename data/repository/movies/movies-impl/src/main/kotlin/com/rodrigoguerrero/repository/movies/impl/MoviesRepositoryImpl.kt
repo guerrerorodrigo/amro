@@ -16,10 +16,13 @@ internal class MoviesRepositoryImpl @Inject constructor(
     private val movieDetailsMapper: MovieDetailsMapper,
 ) : MoviesRepository {
 
-    override suspend fun getTrendingMovies(): Result<List<Trending>> = runCatching {
+    override suspend fun getTrendingMovies(
+        page: Int,
+    ): Result<List<Trending>> = runCatching {
         dataSource.getTrending(
             timeWindow = TimeWindow.Week,
             mediaType = MediaType.Movie,
+            page = page,
         ).fold(
             onSuccess = { trendingMapper.toTrending(dto = it) },
             onFailure = { throw it },

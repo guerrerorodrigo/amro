@@ -2,6 +2,7 @@ package com.rodrigoguerrero.ui.home.mvi
 
 import com.rodrigoguerrero.ui.common.mvi.MviAction
 import com.rodrigoguerrero.ui.home.models.Genre
+import com.rodrigoguerrero.ui.home.models.SortingType
 import com.rodrigoguerrero.ui.home.models.TrendingMovie
 import kotlinx.collections.immutable.ImmutableList
 
@@ -13,4 +14,6 @@ internal sealed interface HomeAction : MviAction {
     ) : HomeAction
 
     data class OnGenreTapped(val id: Int) : HomeAction
+    data object OnSortOrderTapped : HomeAction
+    data class OnSortTypeChanged(val sortingType: SortingType) : HomeAction
 }

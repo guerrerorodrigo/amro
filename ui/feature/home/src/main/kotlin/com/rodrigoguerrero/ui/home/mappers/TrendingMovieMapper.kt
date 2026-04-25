@@ -17,11 +17,14 @@ internal class TrendingMovieMapper @Inject constructor(
         .toPersistentList()
 
     private fun toTrendingMovie(trendingMovie: DomainTrendingMovie): TrendingMovie = TrendingMovie(
+        id = trendingMovie.id,
         title = trendingMovie.title,
         imageUrl = trendingMovie.imageUrl,
         genres = genreMapper
             .toGenres(trendingMovie.genres)
             .joinToString { it.name },
-        genreIds = trendingMovie.genres.map { it.id }.toPersistentSet()
+        genreIds = trendingMovie.genres.map { it.id }.toPersistentSet(),
+        popularity = trendingMovie.popularity,
+        releaseDate = trendingMovie.releaseDate,
     )
 }

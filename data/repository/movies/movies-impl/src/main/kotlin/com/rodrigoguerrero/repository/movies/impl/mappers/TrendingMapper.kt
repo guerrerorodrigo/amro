@@ -11,8 +11,11 @@ internal class TrendingMapper @Inject constructor() {
     ): List<Trending> = dto.results.map { trendingDto -> toTrending(trendingDto) }
 
     private fun toTrending(dto: TrendingDto): Trending = Trending(
+        id = dto.id,
         title = dto.title,
         imageUrl = dto.imageUrl,
         genreIds = dto.genreIds,
+        popularity = dto.popularity,
+        releaseDate = dto.releaseDate,
     )
 }

@@ -1,5 +1,6 @@
 package com.rodrigoguerrero.ui.home.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
@@ -19,7 +20,7 @@ internal fun MovieItem(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier.background(color = MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.spacedBy(AmroTheme.dimens.padding.xs),
     ) {
         MovieImage(
@@ -53,10 +54,13 @@ private fun PreviewMovieItem() {
     PreviewBox {
         MovieItem(
             data = TrendingMovie(
+                id = 123,
                 title = "Title",
                 genres = "Genre / Genre",
                 imageUrl = "",
                 genreIds = persistentSetOf(),
+                popularity = 123.55,
+                releaseDate = 123L,
             )
         )
     }

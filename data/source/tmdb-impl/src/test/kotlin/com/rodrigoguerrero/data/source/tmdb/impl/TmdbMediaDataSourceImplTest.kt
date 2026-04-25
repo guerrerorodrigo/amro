@@ -31,6 +31,7 @@ internal class TmdbMediaDataSourceImplTest {
             val result = subject.getTrending(
                 timeWindow = TimeWindow.Week,
                 mediaType = MediaType.Movie,
+                page = 1,
             )
 
             val firstResult = result.getOrNull()?.results?.firstOrNull()
@@ -61,6 +62,7 @@ internal class TmdbMediaDataSourceImplTest {
             val result = subject.getTrending(
                 timeWindow = TimeWindow.Week,
                 mediaType = MediaType.Movie,
+                page = 1,
             )
 
             assertTrue(result.isFailure)
