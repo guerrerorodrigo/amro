@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.rodrigoguerrero.theme.AmroTheme
 import com.rodrigoguerrero.theme.components.preview.PreviewBox
@@ -18,8 +19,6 @@ import com.rodrigoguerrero.ui.home.models.SortingOrder
 import com.rodrigoguerrero.ui.home.models.SortingType
 import com.rodrigoguerrero.ui.home.models.TrendingMovie
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
-import kotlinx.collections.immutable.persistentSetOf
 
 @Composable
 internal fun TrendingMoviesGrid(
@@ -53,25 +52,14 @@ internal fun TrendingMoviesGrid(
 
 @WidgetPreviews
 @Composable
-private fun PreviewTrendingMoviesGrid() {
-    val movie = TrendingMovie(
-        id = 1,
-        title = "title",
-        imageUrl = "",
-        genres = "Genres",
-        genreIds = persistentSetOf(),
-        popularity = 123.0,
-        releaseDate = 1000000L,
-    )
+private fun PreviewTrendingMoviesGrid(
+    @PreviewParameter(TrendingMoviesGridParamProvider::class) data: ImmutableList<TrendingMovie>,
+) {
     PreviewBox {
         TrendingMoviesGrid(
             sortingType = SortingType.Popularity,
             sortingOrder = SortingOrder.Descending,
-            trendingMovies = persistentListOf(
-                movie,
-                movie.copy(id = 2),
-                movie.copy(id = 3),
-            ),
+            trendingMovies = data,
         )
     }
 }

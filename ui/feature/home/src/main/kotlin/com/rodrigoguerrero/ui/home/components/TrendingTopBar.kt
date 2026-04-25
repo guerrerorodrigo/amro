@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.rodrigoguerrero.theme.AmroTheme
 import com.rodrigoguerrero.theme.components.preview.PreviewBox
 import com.rodrigoguerrero.theme.components.preview.WidgetPreviews
@@ -25,7 +26,6 @@ import com.rodrigoguerrero.ui.home.models.SortingType
 import com.rodrigoguerrero.ui.home.mvi.HomeAction
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableSet
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentSetOf
 
 @Composable
@@ -81,14 +81,14 @@ private fun SortingOrder.getRotationDegrees() = when (this) {
 
 @WidgetPreviews
 @Composable
-private fun PreviewTrendingTopBar() {
-    val actionGenre = Genre(id = 1, name = "Action")
-    val comedyGenre = Genre(id = 2, name = "Comedy")
+private fun PreviewTrendingTopBar(
+    @PreviewParameter(TrendingTopBarParamProvider::class) data: Pair<ImmutableList<Genre>, SortingOrder>,
+) {
     PreviewBox {
         TrendingTopBar(
-            genres = persistentListOf(actionGenre, comedyGenre),
+            genres = data.first,
             selectedGenres = persistentSetOf(1),
-            sortingOrder = SortingOrder.Descending,
+            sortingOrder = data.second,
             onAction = {},
             sortingType = SortingType.Popularity,
         )

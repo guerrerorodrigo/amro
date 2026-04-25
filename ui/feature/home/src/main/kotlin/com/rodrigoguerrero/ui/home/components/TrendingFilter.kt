@@ -8,6 +8,7 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.rodrigoguerrero.theme.AmroTheme
 import com.rodrigoguerrero.theme.components.preview.PreviewBox
 import com.rodrigoguerrero.theme.components.preview.WidgetPreviews
@@ -16,8 +17,6 @@ import com.rodrigoguerrero.ui.home.mvi.HomeAction
 import com.rodrigoguerrero.ui.home.mvi.HomeAction.OnGenreTapped
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableSet
-import kotlinx.collections.immutable.persistentListOf
-import kotlinx.collections.immutable.persistentSetOf
 
 @Composable
 internal fun TrendingFilter(
@@ -45,13 +44,13 @@ internal fun TrendingFilter(
 
 @WidgetPreviews
 @Composable
-private fun PreviewTrendingFilter() {
-    val actionGenre = Genre(id = 1, name = "Action")
-    val comedyGenre = Genre(id = 2, name = "Comedy")
+private fun PreviewTrendingFilter(
+    @PreviewParameter(TrendingFilterParamProvider::class) data: Pair<ImmutableList<Genre>, ImmutableSet<Int>>,
+) {
     PreviewBox {
         TrendingFilter(
-            genres = persistentListOf(actionGenre, comedyGenre),
-            selectedGenres = persistentSetOf(1),
+            genres = data.first,
+            selectedGenres = data.second,
             onAction = {},
         )
     }

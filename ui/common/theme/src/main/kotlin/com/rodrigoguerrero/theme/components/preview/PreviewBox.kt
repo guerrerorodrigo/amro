@@ -14,12 +14,11 @@ import com.rodrigoguerrero.theme.AppTheme
 @Composable
 fun PreviewBox(
     modifier: Modifier = Modifier,
+    isDarkTheme: Boolean = isSystemInDarkTheme(),
     padding: Dp = AmroTheme.dimens.padding.md,
     content: @Composable () -> Unit,
 ) {
-    AppTheme(
-        darkTheme = isSystemInDarkTheme(),
-    ) {
+    AppTheme(darkTheme = isDarkTheme) {
         Box(
             modifier = modifier
                 .background(color = MaterialTheme.colorScheme.background)

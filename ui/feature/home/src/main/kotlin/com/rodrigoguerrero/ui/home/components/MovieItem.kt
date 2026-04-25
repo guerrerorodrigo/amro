@@ -8,11 +8,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.rodrigoguerrero.theme.AmroTheme
 import com.rodrigoguerrero.theme.components.preview.PreviewBox
 import com.rodrigoguerrero.theme.components.preview.WidgetPreviews
 import com.rodrigoguerrero.ui.home.models.TrendingMovie
-import kotlinx.collections.immutable.persistentSetOf
 
 @Composable
 internal fun MovieItem(
@@ -50,18 +50,10 @@ internal fun MovieItem(
 
 @WidgetPreviews
 @Composable
-private fun PreviewMovieItem() {
+private fun PreviewMovieItem(
+    @PreviewParameter(MovieItemParamProvider::class) data: TrendingMovie,
+) {
     PreviewBox {
-        MovieItem(
-            data = TrendingMovie(
-                id = 123,
-                title = "Title",
-                genres = "Genre / Genre",
-                imageUrl = "",
-                genreIds = persistentSetOf(),
-                popularity = 123.55,
-                releaseDate = 123L,
-            )
-        )
+        MovieItem(data = data)
     }
 }
