@@ -15,6 +15,7 @@ import com.rodrigoguerrero.theme.components.errors.FullScreenMessage
 import com.rodrigoguerrero.theme.components.errors.FullScreenMessageState
 import com.rodrigoguerrero.ui.home.components.TrendingMoviesGrid
 import com.rodrigoguerrero.ui.home.components.TrendingTopBar
+import com.rodrigoguerrero.ui.home.mvi.HomeAction
 import com.rodrigoguerrero.ui.home.mvi.HomeViewModel
 
 /**
@@ -51,7 +52,7 @@ internal fun HomeScreenInternal(
             state.isLoading -> FullScreenLoader()
             state.fullScreenMessageState != null -> state.fullScreenMessageState?.let { errorState ->
                 FullScreenMessage(
-                    onClick = { }, // TODO implement
+                    onClick = { viewModel.handleAction(HomeAction.OnLoad) },
                     state = errorState,
                 )
             }

@@ -6,6 +6,7 @@ import com.rodrigoguerrero.ui.common.mvi.Middleware
 import com.rodrigoguerrero.ui.home.mappers.GenreMapper
 import com.rodrigoguerrero.ui.home.mappers.TrendingMovieMapper
 import com.rodrigoguerrero.ui.home.mvi.HomeAction
+import com.rodrigoguerrero.ui.home.mvi.HomeAction.OnDataLoadFailed
 import com.rodrigoguerrero.ui.home.mvi.HomeAction.OnDataLoaded
 import com.rodrigoguerrero.ui.home.mvi.HomeState
 import kotlinx.coroutines.launch
@@ -32,9 +33,7 @@ internal class HomeMiddleware @Inject constructor(
                 .getTrendingMovies()
                 .fold(
                     onSuccess = { processSuccess(it) },
-                    onFailure = {
-                        // TODO implement error handling
-                    },
+                    onFailure = { dispatch(OnDataLoadFailed) },
                 )
         }
     }

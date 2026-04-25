@@ -13,6 +13,8 @@ internal sealed interface HomeAction : MviAction {
         val genres: ImmutableList<Genre>,
     ) : HomeAction
 
+    data object OnDataLoadFailed : HomeAction
+
     data class OnGenreTapped(val id: Int) : HomeAction
     data object OnSortOrderTapped : HomeAction
     data class OnSortTypeChanged(val sortingType: SortingType) : HomeAction

@@ -7,4 +7,6 @@
     <string name="sort_by_dropdown_menu">Sort by dropdown menu</string>
     <string name="sort_by">"Sort by: "</string>
     <string name="there_are_no_results">There are no results</string>
+    <string name="try_again">Try again</string>
+    <string name="loading_error">There was an error loading the trending movies</string>
 </resources>

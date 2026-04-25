@@ -1,13 +1,18 @@
 package com.rodrigoguerrero.ui.home.mvi
 
+import com.rodrigoguerrero.theme.components.errors.FullScreenMessageState
 import com.rodrigoguerrero.ui.common.mvi.Reducer
+import com.rodrigoguerrero.ui.home.R
 import com.rodrigoguerrero.ui.home.models.SortingOrder
 import com.rodrigoguerrero.ui.home.models.SortingType
 import com.rodrigoguerrero.ui.home.models.TrendingMovie
 import com.rodrigoguerrero.ui.home.mvi.HomeAction.OnDataLoaded
 import com.rodrigoguerrero.ui.home.mvi.HomeAction.OnSortOrderTapped
+import com.rodrigoguerrero.ui.home.mvi.HomeAction.OnSortTypeChanged
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.PersistentSet
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.persistentSetOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.collections.immutable.toPersistentSet
@@ -18,6 +23,15 @@ internal class HomeReducer @Inject constructor() : Reducer<HomeState, HomeAction
         state: HomeState,
         action: HomeAction,
     ): HomeState = when (action) {
+        HomeAction.OnLoad -> state.copy(
+            trendingMovies = persistentListOf(),
+            genres = persistentListOf(),
+            selectedGenres = persistentSetOf(),
+            filteredTrendingMovies = persistentListOf(),
+            isLoading = true,
+            fullScreenMessageState = null,
+        )
+
         is OnDataLoaded -> {
             val sortedMovies = action.trendingMovies.sort(
                 sortingType = state.sortingType,
@@ -54,7 +68,7 @@ internal class HomeReducer @Inject constructor() : Reducer<HomeState, HomeAction
             )
         }
 
-        is HomeAction.OnSortTypeChanged -> state.copy(
+        is OnSortTypeChanged -> state.copy(
             sortingType = action.sortingType,
             filteredTrendingMovies = state.filteredTrendingMovies.sort(
                 sortingType = action.sortingType,
@@ -62,7 +76,13 @@ internal class HomeReducer @Inject constructor() : Reducer<HomeState, HomeAction
             ),
         )
 
-        else -> state
+        is HomeAction.OnDataLoadFailed -> state.copy(
+            fullScreenMessageState = FullScreenMessageState.LocalFullScreenMessage(
+                messageRes = R.string.loading_error,
+                ctaLabelRes = R.string.try_again,
+            ),
+            isLoading = false,
+        )
     }
 
     private fun ImmutableList<TrendingMovie>.sort(
