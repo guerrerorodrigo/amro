@@ -13,9 +13,9 @@ import androidx.compose.ui.res.painterResource
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.rodrigoguerrero.theme.AmroTheme
+import com.rodrigoguerrero.theme.R
 import com.rodrigoguerrero.theme.components.preview.PreviewBox
 import com.rodrigoguerrero.theme.components.preview.WidgetPreviews
-import com.rodrigoguerrero.ui.home.R
 
 @Composable
 internal fun MovieImage(

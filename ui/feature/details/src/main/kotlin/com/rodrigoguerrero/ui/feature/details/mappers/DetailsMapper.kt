@@ -19,6 +19,6 @@ internal class DetailsMapper @Inject constructor() {
         revenue = details.revenue,
         runtime = details.runtime,
         status = details.status,
-        releaseDate = details.releaseDate,
+        releaseDate = details.releaseDate.orEmpty(),
     )
 }

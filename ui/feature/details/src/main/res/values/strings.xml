@@ -2,4 +2,14 @@
 <resources>
     <string name="try_again">Try again</string>
     <string name="loading_error">There was an error loading the trending movies</string>
+    <string name="rating">Rating</string>
+    <string name="movie_info">%1$.2f • %2$d min • %3$s</string>
+    <string name="overview">Overview</string>
+    <string name="tagline">\"%1$s\"</string>
+    <string name="budget">Budget</string>
+    <string name="revenue">Revenue</string>
+    <string name="number_of_votes">Number of Votes</string>
+    <string name="status_of_this_movie">Status of This Movie</string>
+    <string name="imdb">Open in IMDB</string>
+    <string name="back">Back</string>
 </resources>

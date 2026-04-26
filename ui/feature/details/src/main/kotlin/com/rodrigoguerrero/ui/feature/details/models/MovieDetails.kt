@@ -18,7 +18,7 @@ internal data class MovieDetails(
     val genres: ImmutableList<String>,
     val voteCount: Int,
     val status: String,
-    val releaseDate: String?,
+    val releaseDate: String,
 ) {
     companion object {
         val initial = MovieDetails(
@@ -34,7 +34,7 @@ internal data class MovieDetails(
             genres = persistentListOf(),
             voteCount = 0,
             status = "",
-            releaseDate = null,
+            releaseDate = "",
         )
     }
 }
