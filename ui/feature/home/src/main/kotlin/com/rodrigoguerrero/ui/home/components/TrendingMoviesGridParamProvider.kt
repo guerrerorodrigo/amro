@@ -18,8 +18,8 @@ private val movie = TrendingMovie(
 
 internal val testTrendingMovies = persistentListOf(
     movie,
-    movie.copy(id = 2),
-    movie.copy(id = 3),
+    movie.copy(id = 2, title = "title2", genreIds = persistentSetOf(1)),
+    movie.copy(id = 3, title = "title3", genreIds = persistentSetOf(2)),
 )
 
 internal class TrendingMoviesGridParamProvider : PreviewParameterProvider<ImmutableList<TrendingMovie>> {
