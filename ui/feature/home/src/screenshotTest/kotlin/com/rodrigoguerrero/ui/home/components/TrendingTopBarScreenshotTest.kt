@@ -8,7 +8,7 @@ import com.rodrigoguerrero.ui.home.models.SortingOrder
 import com.rodrigoguerrero.ui.home.models.SortingType
 import kotlinx.collections.immutable.persistentSetOf
 
-internal class TrendingTopBarSnapshotTest {
+internal class TrendingTopBarScreenshotTest {
 
     @PreviewTest
     @Preview(showBackground = true)

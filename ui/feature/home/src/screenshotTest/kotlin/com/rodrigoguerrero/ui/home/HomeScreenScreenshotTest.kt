@@ -6,7 +6,7 @@ import com.android.tools.screenshot.PreviewTest
 import com.rodrigoguerrero.theme.components.preview.PreviewBox
 import com.rodrigoguerrero.ui.home.mvi.HomeState
 
-internal class HomeScreenSnapshotTest {
+internal class HomeScreenScreenshotTest {
 
     @PreviewTest
     @Preview(showBackground = true)

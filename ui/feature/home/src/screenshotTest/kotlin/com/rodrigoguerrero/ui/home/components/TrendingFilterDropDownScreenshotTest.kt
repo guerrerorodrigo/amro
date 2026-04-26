@@ -6,7 +6,7 @@ import com.android.tools.screenshot.PreviewTest
 import com.rodrigoguerrero.theme.components.preview.PreviewBox
 import com.rodrigoguerrero.ui.home.models.SortingType
 
-internal class TrendingFilterDropDownSnapshotTest {
+internal class TrendingFilterDropDownScreenshotTest {
 
     @PreviewTest
     @Preview(showBackground = true)
