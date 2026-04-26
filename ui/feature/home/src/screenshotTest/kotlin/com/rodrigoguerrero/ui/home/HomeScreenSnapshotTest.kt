@@ -70,7 +70,7 @@ internal class HomeScreenSnapshotTest {
         state: HomeState,
     ) {
         PreviewBox(isDarkTheme = isDarkMode) {
-            HomeScreenContent(state = state, onAction = {})
+            HomeScreenContent(state = state, onAction = {}, onMovieClick = {})
         }
     }
 }

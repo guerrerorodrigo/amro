@@ -30,6 +30,7 @@ internal class TrendingMoviesGridSnapshotTest {
                 sortingType = SortingType.Popularity,
                 sortingOrder = SortingOrder.Descending,
                 trendingMovies = testTrendingMovies,
+                onMovieClick = {},
             )
         }
     }

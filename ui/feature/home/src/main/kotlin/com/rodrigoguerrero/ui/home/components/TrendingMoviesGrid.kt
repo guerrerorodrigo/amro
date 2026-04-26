@@ -25,6 +25,7 @@ internal fun TrendingMoviesGrid(
     sortingOrder: SortingOrder,
     sortingType: SortingType,
     trendingMovies: ImmutableList<TrendingMovie>,
+    onMovieClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val gridState = rememberLazyGridState()
@@ -45,7 +46,7 @@ internal fun TrendingMoviesGrid(
         columns = GridCells.Adaptive(130.dp),
     ) {
         items(items = trendingMovies, key = { it.id }) { item ->
-            MovieItem(data = item)
+            MovieItem(data = item, onClick = onMovieClick)
         }
     }
 }
@@ -60,6 +61,7 @@ private fun PreviewTrendingMoviesGrid(
             sortingType = SortingType.Popularity,
             sortingOrder = SortingOrder.Descending,
             trendingMovies = data,
+            onMovieClick = {},
         )
     }
 }

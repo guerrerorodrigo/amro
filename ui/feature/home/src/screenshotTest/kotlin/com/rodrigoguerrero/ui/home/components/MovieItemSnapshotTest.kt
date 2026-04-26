@@ -24,7 +24,7 @@ internal class MovieItemSnapshotTest {
     @Composable
     private fun TestComposable(isDarkMode: Boolean) {
         PreviewBox(isDarkTheme = isDarkMode) {
-            MovieItem(data = testTrendingMovie)
+            MovieItem(data = testTrendingMovie, onClick = {})
         }
     }
 }

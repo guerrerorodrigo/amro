@@ -1,6 +1,7 @@
 package com.rodrigoguerrero.ui.home.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
@@ -17,10 +18,13 @@ import com.rodrigoguerrero.ui.home.models.TrendingMovie
 @Composable
 internal fun MovieItem(
     data: TrendingMovie,
+    onClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.background(color = MaterialTheme.colorScheme.background),
+        modifier = modifier
+            .background(color = MaterialTheme.colorScheme.background)
+            .clickable { onClick(data.id) },
         verticalArrangement = Arrangement.spacedBy(AmroTheme.dimens.padding.xs),
     ) {
         MovieImage(
@@ -54,6 +58,6 @@ private fun PreviewMovieItem(
     @PreviewParameter(MovieItemParamProvider::class) data: TrendingMovie,
 ) {
     PreviewBox {
-        MovieItem(data = data)
+        MovieItem(data = data, onClick = {})
     }
 }

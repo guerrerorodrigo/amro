@@ -24,17 +24,21 @@ import com.rodrigoguerrero.ui.home.mvi.HomeViewModel
 
 /**
  * [Composable] that holds the home screen
+ * @param onNavigateToDetails lambda executed when tapping on a movie item
+ * @param modifier optional [Modifier]
  */
 @Composable
 fun HomeScreen(
+    onNavigateToDetails: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    HomeScreenInternal(modifier = modifier)
+    HomeScreenInternal(modifier = modifier, onMovieClick = onNavigateToDetails)
 }
 
 @Composable
 internal fun HomeScreenInternal(
     modifier: Modifier = Modifier,
+    onMovieClick: (Long) -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -43,12 +47,14 @@ internal fun HomeScreenInternal(
         state = state,
         onAction = viewModel::handleAction,
         modifier = modifier,
+        onMovieClick = onMovieClick,
     )
 }
 
 @Composable
 internal fun HomeScreenContent(
     state: HomeState,
+    onMovieClick: (Long) -> Unit,
     onAction: (HomeAction) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -84,6 +90,7 @@ internal fun HomeScreenContent(
                 sortingType = state.sortingType,
                 trendingMovies = state.filteredTrendingMovies,
                 modifier = Modifier.padding(paddingValues),
+                onMovieClick = onMovieClick,
             )
         }
     }
@@ -95,6 +102,6 @@ private fun PreviewHomeScreen(
     @PreviewParameter(HomeParamProvider::class) data: HomeState,
 ) {
     PreviewBox {
-        HomeScreenContent(state = data, onAction = {})
+        HomeScreenContent(state = data, onAction = {}, onMovieClick = {})
     }
 }

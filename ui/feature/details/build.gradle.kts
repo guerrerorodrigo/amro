@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.rodrigoguerrero.ui.home"
+    namespace = "com.rodrigoguerrero.ui.feature.details"
     compileSdk {
         version = release(36)
     }
@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain:home:home-api"))
+    implementation(project(":domain:details:details-api"))
     implementation(project(":ui:common:mvi"))
     implementation(project(":ui:common:theme"))
 
