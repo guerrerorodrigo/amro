@@ -11,7 +11,7 @@ internal val domainTrendingMovie = DomainTrendingMovie(
     imageUrl = "image url",
     genres = listOf(domainGenre, domainGenre.copy(id = 2, name = "another genre")),
     popularity = 8.33,
-    releaseDate = 1234000000,
+    releaseDate = 2,
 )
 
 internal val expectedTrendingMovie = TrendingMovie(
