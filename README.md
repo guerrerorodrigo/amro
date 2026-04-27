@@ -83,7 +83,7 @@ amro/
 | Image loading | Coil |
 | Code quality | Detekt |
 | Screenshot testing | Compose Preview |
-| Testing | Junit, Mockk and Turbine |
+| Testing | Junit, Mockk, Turbine and Espresso |
 | Dates | Kotlinx Datetime |
 ---
 
