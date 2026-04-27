@@ -7,12 +7,14 @@ import com.rodrigoguerrero.ui.feature.details.models.MovieDetails
 
 @Stable
 internal data class DetailsState(
+    val id: Long?,
     val isLoading: Boolean,
     val movieDetails: MovieDetails,
     val fullScreenMessageState: FullScreenMessageState?,
 ) : State {
     companion object {
         val initial = DetailsState(
+            id = null,
             isLoading = true,
             movieDetails = MovieDetails.initial,
             fullScreenMessageState = null,

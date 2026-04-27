@@ -14,12 +14,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.rodrigoguerrero.theme.AmroTheme
 import com.rodrigoguerrero.theme.components.preview.PreviewBox
 import com.rodrigoguerrero.theme.components.preview.WidgetPreviews
 import com.rodrigoguerrero.ui.feature.details.R
 import com.rodrigoguerrero.ui.feature.details.models.MovieDetails
-import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 internal fun MovieInfo(
@@ -69,22 +69,9 @@ internal fun MovieInfo(
 
 @WidgetPreviews
 @Composable
-private fun PreviewMovieInfo() {
-    val data = MovieDetails(
-        title = "title",
-        tagline = "tagline",
-        overview = "overview",
-        budget = "$5000000",
-        imdbUrl = "",
-        posterUrl = "",
-        voteAverage = 8.4,
-        revenue = "$33330000",
-        runtime = 98,
-        genres = persistentListOf("Animation", "Comedy", "Adventure", "Fantasy"),
-        voteCount = 12345,
-        status = "released",
-        releaseDate = "May 31, 2017",
-    )
+private fun PreviewMovieInfo(
+    @PreviewParameter(MovieDetailsParamProvider::class) data: MovieDetails,
+) {
     PreviewBox {
         MovieInfo(data = data)
     }

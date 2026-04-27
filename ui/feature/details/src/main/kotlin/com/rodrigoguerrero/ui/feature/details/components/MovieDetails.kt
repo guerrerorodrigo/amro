@@ -18,12 +18,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.rodrigoguerrero.theme.AmroTheme
 import com.rodrigoguerrero.theme.components.preview.PreviewBox
 import com.rodrigoguerrero.theme.components.preview.WidgetPreviews
 import com.rodrigoguerrero.ui.feature.details.R
 import com.rodrigoguerrero.ui.feature.details.models.MovieDetails
-import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 internal fun MovieDetails(
@@ -109,22 +109,9 @@ private fun TwoDetailSections(
 
 @WidgetPreviews
 @Composable
-private fun PreviewMovieDetails() {
-    val data = MovieDetails(
-        title = "title",
-        tagline = "tagline",
-        overview = "overview",
-        budget = "$5000000",
-        imdbUrl = "",
-        posterUrl = "",
-        voteAverage = 8.4,
-        revenue = "$33330000",
-        runtime = 98,
-        genres = persistentListOf("Animation", "Comedy", "Adventure", "Fantasy"),
-        voteCount = 12345,
-        status = "released",
-        releaseDate = "May 31, 2017",
-    )
+private fun PreviewMovieDetails(
+    @PreviewParameter(MovieDetailsParamProvider ::class) data: MovieDetails,
+) {
     PreviewBox {
         MovieDetails(data = data, onBack = {})
     }

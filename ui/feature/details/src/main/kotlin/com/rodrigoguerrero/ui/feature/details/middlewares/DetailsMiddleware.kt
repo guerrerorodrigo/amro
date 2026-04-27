@@ -32,7 +32,7 @@ internal class DetailsMiddleware @Inject constructor(
                 .getMovieDetails(id = id.toString())
                 .fold(
                     onSuccess = { processSuccess(it) },
-                    onFailure = { dispatch(OnLoadFailed) },
+                    onFailure = { dispatch(OnLoadFailed(id)) },
                 )
         }
     }

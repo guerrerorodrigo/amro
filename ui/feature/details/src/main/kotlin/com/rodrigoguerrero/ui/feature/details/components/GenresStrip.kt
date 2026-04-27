@@ -10,11 +10,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.rodrigoguerrero.theme.AmroTheme
 import com.rodrigoguerrero.theme.components.preview.PreviewBox
 import com.rodrigoguerrero.theme.components.preview.WidgetPreviews
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 internal fun GenresStrip(
@@ -48,10 +48,10 @@ internal fun GenresStrip(
 
 @WidgetPreviews
 @Composable
-private fun PreviewGenresStrip() {
+private fun PreviewGenresStrip(
+    @PreviewParameter(MovieItemParamProvider::class) genres: ImmutableList<String>,
+) {
     PreviewBox {
-        GenresStrip(
-            genres = persistentListOf("Comedy", "Action", "Adventure", "Family", "Fantasy", "Animation"),
-        )
+        GenresStrip(genres = genres)
     }
 }

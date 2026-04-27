@@ -21,7 +21,8 @@ internal class DetailsReducer @Inject constructor() : Reducer<DetailsState, Deta
             movieDetails = action.movieDetails,
             fullScreenMessageState = null,
         )
-        DetailsAction.OnLoadFailed -> state.copy(
+        is DetailsAction.OnLoadFailed -> state.copy(
+            id = action.id,
             isLoading = false,
             movieDetails = MovieDetails.initial,
             fullScreenMessageState = FullScreenMessageState.LocalFullScreenMessage(

@@ -12,9 +12,11 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.rodrigoguerrero.theme.components.preview.PreviewBox
 import com.rodrigoguerrero.theme.components.preview.WidgetPreviews
 import com.rodrigoguerrero.ui.feature.details.R
+import com.rodrigoguerrero.ui.feature.details.models.MovieDetails
 
 @Composable
 internal fun MovieInfoRow(
@@ -45,12 +47,14 @@ internal fun MovieInfoRow(
 
 @WidgetPreviews
 @Composable
-private fun PreviewMovieInfoRow() {
+private fun PreviewMovieInfoRow(
+    @PreviewParameter(MovieDetailsParamProvider::class) data: MovieDetails,
+) {
     PreviewBox {
         MovieInfoRow(
-            voteAverage = 8.34,
-            runtime = 98,
-            releaseDate = "May 31, 2017",
+            voteAverage = data.voteAverage,
+            runtime = data.runtime,
+            releaseDate = data.releaseDate,
         )
     }
 }

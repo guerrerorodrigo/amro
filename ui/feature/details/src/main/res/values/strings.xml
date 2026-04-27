@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="try_again">Try again</string>
-    <string name="loading_error">There was an error loading the trending movies</string>
+    <string name="loading_error">There was an error loading the movie</string>
     <string name="rating">Rating</string>
     <string name="movie_info">%1$.2f • %2$d min • %3$s</string>
     <string name="overview">Overview</string>

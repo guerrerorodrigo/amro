@@ -9,11 +9,15 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.rodrigoguerrero.theme.components.FullScreenLoader
 import com.rodrigoguerrero.theme.components.errors.FullScreenMessage
+import com.rodrigoguerrero.theme.components.preview.PreviewBox
+import com.rodrigoguerrero.theme.components.preview.WidgetPreviews
 import com.rodrigoguerrero.ui.feature.details.components.MovieDetails
+import com.rodrigoguerrero.ui.feature.details.mvi.DetailsAction
 import com.rodrigoguerrero.ui.feature.details.mvi.DetailsState
 import com.rodrigoguerrero.ui.feature.details.mvi.DetailsViewModel
 
@@ -32,7 +36,12 @@ internal fun MovieDetailsScreenInternal(
     viewModel: DetailsViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    MovieDetailsContent(state = state, modifier = modifier, onBack = onBack)
+    MovieDetailsContent(
+        state = state,
+        modifier = modifier,
+        onBack = onBack,
+        onAction = viewModel::handleAction,
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -40,6 +49,7 @@ internal fun MovieDetailsScreenInternal(
 internal fun MovieDetailsContent(
     state: DetailsState,
     onBack: () -> Unit,
+    onAction: (DetailsAction) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -50,6 +60,9 @@ internal fun MovieDetailsContent(
             state.isLoading -> FullScreenLoader()
             state.fullScreenMessageState != null -> FullScreenMessage(
                 state = state.fullScreenMessageState,
+                onClick = state.id?.let { id ->
+                    { onAction(DetailsAction.OnLoad(id)) }
+                }
             )
 
             else -> MovieDetails(
@@ -58,5 +71,19 @@ internal fun MovieDetailsContent(
                 onBack = onBack,
             )
         }
+    }
+}
+
+@WidgetPreviews
+@Composable
+private fun PreviewMovieDetailsScreen(
+    @PreviewParameter(MovieDetailsParamProvider::class) state: DetailsState,
+) {
+    PreviewBox {
+        MovieDetailsContent(
+            state = state,
+            onBack = {},
+            onAction = {},
+        )
     }
 }

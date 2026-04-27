@@ -6,5 +6,5 @@ import com.rodrigoguerrero.ui.feature.details.models.MovieDetails
 internal sealed interface DetailsAction : MviAction {
     data class OnLoad(val id: Long) : DetailsAction
     data class OnDataLoaded(val movieDetails: MovieDetails) : DetailsAction
-    data object OnLoadFailed : DetailsAction
+    data class OnLoadFailed(val id: Long) : DetailsAction
 }
