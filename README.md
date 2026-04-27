@@ -89,12 +89,6 @@ amro/
 
 ## Getting Started
 
-### Prerequisites
-
-- **Android Studio** Ladybug (2024.2) or newer
-- **JDK 17**
-- A [TMDB API key](https://www.themoviedb.org/settings/api)
-
 ### Setup
 
 1. Clone the repository:
