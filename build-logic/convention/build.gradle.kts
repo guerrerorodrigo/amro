@@ -17,6 +17,10 @@ dependencies {
 
 gradlePlugin {
     plugins {
+        register("amroAndroidApp") {
+            id = "com.guerrerorodrigo.amro.android.app"
+            implementationClass = "AndroidAppPlugin"
+        }
         register("amroAndroidFeature") {
             id = "com.guerrerorodrigo.amro.android.feature"
             implementationClass = "AndroidFeatureComposePlugin"

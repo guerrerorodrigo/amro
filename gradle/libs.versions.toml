@@ -24,7 +24,10 @@ lifecycle-ktx = "2.10.0"
 minSdk = "24"
 mockk = "1.14.9"
 screenshot = "0.0.1-alpha14"
+targetSdk = "36"
 turbine = "1.2.1"
+versionCode = "1"
+versionName = "1.0"
 
 [libraries]
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
@@ -79,6 +82,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot" }
 
 # convention plugins
+amro-android-app = { id = "com.guerrerorodrigo.amro.android.app", version = "unspecified" }
 amro-android-library = { id = "com.guerrerorodrigo.amro.android.library", version = "unspecified" }
 amro-android-ui-test = { id = "com.guerrerorodrigo.amro.android.ui.test", version = "unspecified" }
 amro-api-library = { id = "com.guerrerorodrigo.amro.api.library", version = "unspecified" }
