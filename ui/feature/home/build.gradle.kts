@@ -3,15 +3,13 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization.plugin)
     alias(libs.plugins.screenshot)
+    alias(libs.plugins.amro.android.ui.test)
     alias(libs.plugins.amro.hilt)
     alias(libs.plugins.amro.unit.test)
 }
 
 android {
     namespace = "com.rodrigoguerrero.ui.home"
-    defaultConfig {
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
     experimentalProperties["android.experimental.enableScreenshotTest"] = true
 }
 
@@ -30,13 +28,4 @@ dependencies {
 
     screenshotTestImplementation(libs.screenshot.validation.api)
     screenshotTestImplementation(libs.androidx.compose.ui.tooling)
-
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
 }

@@ -79,6 +79,7 @@ screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot"
 
 # convention plugins
 amro-android-library = { id = "com.guerrerorodrigo.amro.android.library", version = "unspecified" }
+amro-android-ui-test = { id = "com.guerrerorodrigo.amro.android.ui.test", version = "unspecified" }
 amro-api-library = { id = "com.guerrerorodrigo.amro.api.library", version = "unspecified" }
 amro-hilt = { id = "com.guerrerorodrigo.amro.hilt", version = "unspecified" }
 amro-unit-test = { id = "com.guerrerorodrigo.amro.unit.test", version = "unspecified" }

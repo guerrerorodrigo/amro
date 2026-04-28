@@ -20,6 +20,10 @@ gradlePlugin {
             id = "com.guerrerorodrigo.amro.android.library"
             implementationClass = "AndroidLibraryPlugin"
         }
+        register("amroAndroidUiTest") {
+            id = "com.guerrerorodrigo.amro.android.ui.test"
+            implementationClass = "AndroidUiTestPlugin"
+        }
         register("amroApiLibrary") {
             id = "com.guerrerorodrigo.amro.api.library"
             implementationClass = "ApiLibraryPlugin"
