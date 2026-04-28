@@ -2,15 +2,14 @@ plugins {
     alias(libs.plugins.amro.android.library)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization.plugin)
-    alias(libs.plugins.screenshot)
     alias(libs.plugins.amro.android.ui.test)
     alias(libs.plugins.amro.hilt)
+    alias(libs.plugins.amro.screenshot.test)
     alias(libs.plugins.amro.unit.test)
 }
 
 android {
     namespace = "com.rodrigoguerrero.ui.home"
-    experimentalProperties["android.experimental.enableScreenshotTest"] = true
 }
 
 dependencies {
@@ -25,7 +24,4 @@ dependencies {
     implementation(libs.kotlinx.collections.immutable)
 
     implementation(libs.coil.compose)
-
-    screenshotTestImplementation(libs.screenshot.validation.api)
-    screenshotTestImplementation(libs.androidx.compose.ui.tooling)
 }

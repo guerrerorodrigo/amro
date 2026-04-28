@@ -12,6 +12,7 @@ java {
 dependencies {
     compileOnly(libs.android.gradle.plugin)
     compileOnly(libs.ksp.gradle.plugin)
+    compileOnly(libs.screenshot.gradle.plugin)
 }
 
 gradlePlugin {
@@ -31,6 +32,10 @@ gradlePlugin {
         register("amroHilt") {
             id = "com.guerrerorodrigo.amro.hilt"
             implementationClass = "HiltConventionPlugin"
+        }
+        register("amroScreenshotTest") {
+            id = "com.guerrerorodrigo.amro.screenshot.test"
+            implementationClass = "ScreenshotTestPlugin"
         }
         register("amroUnitTest") {
             id = "com.guerrerorodrigo.amro.unit.test"
