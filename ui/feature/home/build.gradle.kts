@@ -1,10 +1,9 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization.plugin)
-    alias(libs.plugins.ksp)
     alias(libs.plugins.screenshot)
+    alias(libs.plugins.amro.hilt)
 }
 
 android {
@@ -39,9 +38,7 @@ dependencies {
     implementation(project(":ui:common:mvi"))
     implementation(project(":ui:common:theme"))
 
-    implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
-    ksp(libs.hilt.compiler)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)

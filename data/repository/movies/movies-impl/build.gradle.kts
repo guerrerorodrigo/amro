@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.ksp)
+    alias(libs.plugins.amro.hilt)
 }
 
 android {
@@ -27,9 +26,6 @@ android {
 dependencies {
     implementation(project(":data:repository:movies:movies-api"))
     implementation(project(":data:source:tmdb-api"))
-
-    implementation(libs.hilt)
-    ksp(libs.hilt.compiler)
 
     testImplementation(libs.bundles.junit)
     testImplementation(libs.kotlinx.coroutines.test)

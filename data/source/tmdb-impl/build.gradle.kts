@@ -2,8 +2,7 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.ksp)
+    alias(libs.plugins.amro.hilt)
 }
 
 android {
@@ -46,9 +45,6 @@ android {
 dependencies {
     implementation(project(":data:source:tmdb-api"))
     implementation(libs.bundles.ktor)
-
-    implementation(libs.hilt)
-    ksp(libs.hilt.compiler)
 
     testImplementation(libs.io.ktor.ktor.client.mock)
     testImplementation(libs.bundles.junit)

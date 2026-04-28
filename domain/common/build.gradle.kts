@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.ksp)
+    alias(libs.plugins.amro.hilt)
 }
 
 android {
@@ -30,9 +29,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.hilt)
-    ksp(libs.hilt.compiler)
-
     implementation(libs.kotlinx.datetime)
 
     testImplementation(libs.bundles.junit)
