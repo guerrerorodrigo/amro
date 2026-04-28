@@ -1,24 +1,15 @@
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.amro.android.library)
 }
 
 android {
     namespace = "com.rodrigoguerrero.ui.common.mvi"
-    compileSdk {
-        version = release(36)
-    }
-
     testOptions {
         unitTests.all {
             it.useJUnitPlatform {
                 includeEngines("junit-jupiter")
             }
         }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 

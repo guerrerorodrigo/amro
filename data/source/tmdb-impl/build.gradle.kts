@@ -1,16 +1,12 @@
 import java.util.Properties
 
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.amro.android.library)
     alias(libs.plugins.amro.hilt)
 }
 
 android {
     namespace = "com.rodrigoguerrero.data.source.tmdb.impl"
-    compileSdk {
-        version = release(36)
-    }
-
     val localProperties = Properties().apply {
         val file = rootProject.file("local.properties")
         if (file.exists()) {
@@ -34,11 +30,6 @@ android {
                 includeEngines("junit-jupiter")
             }
         }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 

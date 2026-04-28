@@ -1,18 +1,10 @@
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.amro.android.library)
     alias(libs.plugins.amro.hilt)
 }
 
 android {
     namespace = "com.rodrigoguerrero.domain.common"
-
-    compileSdk {
-        version = release(36)
-    }
-
-    defaultConfig {
-        minSdk = 24
-    }
 
     testOptions {
         unitTests.all {
@@ -20,11 +12,6 @@ android {
                 includeEngines("junit-jupiter")
             }
         }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 

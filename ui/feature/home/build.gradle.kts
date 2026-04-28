@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.amro.android.library)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization.plugin)
     alias(libs.plugins.screenshot)
@@ -8,12 +8,7 @@ plugins {
 
 android {
     namespace = "com.rodrigoguerrero.ui.home"
-    compileSdk {
-        version = release(36)
-    }
-
     defaultConfig {
-        minSdk = 24
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -23,11 +18,6 @@ android {
                 includeEngines("junit-jupiter")
             }
         }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
     }
 
     experimentalProperties["android.experimental.enableScreenshotTest"] = true
