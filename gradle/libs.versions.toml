@@ -2,6 +2,7 @@
 activityCompose = "1.13.0"
 agp = "9.2.0"
 coil = "2.7.0"
+compileSdk = "36"
 composeBom = "2026.04.01"
 compose-navigation = "2.9.8"
 coreKtx = "1.18.0"
@@ -76,6 +77,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot" }
 
 # convention plugins
+amro-api-library = { id = "com.guerrerorodrigo.amro.api.library", version = "unspecified" }
 amro-hilt = { id = "com.guerrerorodrigo.amro.hilt", version = "unspecified" }
 
 [bundles]

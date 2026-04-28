@@ -16,6 +16,10 @@ dependencies {
 
 gradlePlugin {
     plugins {
+        register("amroApiLibrary") {
+            id = "com.guerrerorodrigo.amro.api.library"
+            implementationClass = "ApiLibraryPlugin"
+        }
         register("amroHilt") {
             id = "com.guerrerorodrigo.amro.hilt"
             implementationClass = "HiltConventionPlugin"
