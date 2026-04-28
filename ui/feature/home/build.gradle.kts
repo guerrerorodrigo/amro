@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization.plugin)
     alias(libs.plugins.screenshot)
     alias(libs.plugins.amro.hilt)
+    alias(libs.plugins.amro.unit.test)
 }
 
 android {
@@ -11,15 +12,6 @@ android {
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
-    testOptions {
-        unitTests.all {
-            it.useJUnitPlatform {
-                includeEngines("junit-jupiter")
-            }
-        }
-    }
-
     experimentalProperties["android.experimental.enableScreenshotTest"] = true
 }
 
@@ -35,11 +27,6 @@ dependencies {
     implementation(libs.kotlinx.collections.immutable)
 
     implementation(libs.coil.compose)
-
-    testImplementation(libs.bundles.junit)
-    testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.mockk)
-    testImplementation(libs.turbine)
 
     screenshotTestImplementation(libs.screenshot.validation.api)
     screenshotTestImplementation(libs.androidx.compose.ui.tooling)

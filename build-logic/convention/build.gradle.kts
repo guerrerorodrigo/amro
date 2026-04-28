@@ -28,5 +28,9 @@ gradlePlugin {
             id = "com.guerrerorodrigo.amro.hilt"
             implementationClass = "HiltConventionPlugin"
         }
+        register("amroUnitTest") {
+            id = "com.guerrerorodrigo.amro.unit.test"
+            implementationClass = "UnitTestPlugin"
+        }
     }
 }
