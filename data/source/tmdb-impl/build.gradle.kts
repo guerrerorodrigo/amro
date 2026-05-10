@@ -1,17 +1,13 @@
 import java.util.Properties
 
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.ksp)
+    alias(libs.plugins.amro.android.library)
+    alias(libs.plugins.amro.hilt)
+    alias(libs.plugins.amro.unit.test)
 }
 
 android {
     namespace = "com.rodrigoguerrero.data.source.tmdb.impl"
-    compileSdk {
-        version = release(36)
-    }
-
     val localProperties = Properties().apply {
         val file = rootProject.file("local.properties")
         if (file.exists()) {
@@ -28,34 +24,11 @@ android {
     buildFeatures {
         buildConfig = true
     }
-
-    testOptions {
-        unitTests.all {
-            it.useJUnitPlatform {
-                includeEngines("junit-jupiter")
-            }
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
 }
 
 dependencies {
     implementation(project(":data:source:tmdb-api"))
     implementation(libs.bundles.ktor)
 
-    implementation(libs.hilt)
-    ksp(libs.hilt.compiler)
-
     testImplementation(libs.io.ktor.ktor.client.mock)
-    testImplementation(libs.bundles.junit)
-    testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.mockk)
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
 }

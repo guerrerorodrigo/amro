@@ -2,6 +2,7 @@
 activityCompose = "1.13.0"
 agp = "9.2.0"
 coil = "2.7.0"
+compileSdk = "36"
 composeBom = "2026.04.01"
 compose-navigation = "2.9.8"
 coreKtx = "1.18.0"
@@ -20,9 +21,13 @@ kotlinx-serialization-json = "1.11.0"
 ksp = "2.3.6"
 ktor-version = "3.4.2"
 lifecycle-ktx = "2.10.0"
+minSdk = "24"
 mockk = "1.14.9"
 screenshot = "0.0.1-alpha14"
+targetSdk = "36"
 turbine = "1.2.1"
+versionCode = "1"
+versionName = "1.0"
 
 [libraries]
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
@@ -38,6 +43,7 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-ktx" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle-ktx" }
@@ -60,7 +66,9 @@ kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collec
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
+ksp-gradle-plugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+screenshot-gradle-plugin = { module = "com.android.compose.screenshot:com.android.compose.screenshot.gradle.plugin", version.ref = "screenshot" }
 screenshot-validation-api = { group = "com.android.tools.screenshot", name = "screenshot-validation-api", version.ref = "screenshot"}
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 
@@ -72,6 +80,16 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 kotlin-serialization-plugin = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot" }
+
+# convention plugins
+amro-android-app = { id = "com.guerrerorodrigo.amro.android.app", version = "unspecified" }
+amro-android-library = { id = "com.guerrerorodrigo.amro.android.library", version = "unspecified" }
+amro-android-ui-test = { id = "com.guerrerorodrigo.amro.android.ui.test", version = "unspecified" }
+amro-api-library = { id = "com.guerrerorodrigo.amro.api.library", version = "unspecified" }
+amro-feature-compose = { id = "com.guerrerorodrigo.amro.android.feature", version = "unspecified" }
+amro-hilt = { id = "com.guerrerorodrigo.amro.hilt", version = "unspecified" }
+amro-screenshot-test = { id = "com.guerrerorodrigo.amro.screenshot.test", version = "unspecified" }
+amro-unit-test = { id = "com.guerrerorodrigo.amro.unit.test", version = "unspecified" }
 
 [bundles]
 ktor = [

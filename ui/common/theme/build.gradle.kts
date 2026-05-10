@@ -1,18 +1,10 @@
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.amro.android.library)
     alias(libs.plugins.kotlin.compose)
 }
 
 android {
     namespace = "com.rodrigoguerrero.theme"
-    compileSdk {
-        version = release(36)
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
 }
 
 dependencies {
